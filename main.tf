@@ -78,30 +78,3 @@ resource "google_compute_instance" "this" {
   #   scopes = ["cloud-platform"]
   # }
 }
-
-# resource "ssh_resource" "config_files" {
-#   host        = local.public_ip
-#   user        = var.os
-#   private_key = tls_private_key.this.private_key_pem
-
-#   depends_on = [google_compute_instance.this]
-
-#   file {
-#     content     = templatefile("templates/steam_ingress.yaml", { ip_address = replace(local.public_ip, ".", "-") })
-#     destination = "/tmp/steam-ingress.yaml"
-#     permissions = "0700"
-#   }
-
-#   file {
-#     content     = templatefile("templates/mlops_auto_conf_tfvars.tf", { ip_address = replace(local.public_ip, ".", "-") })
-#     destination = "/tmp/config.auto.tfvars"
-#     permissions = "0700"
-#   }
-
-#   file {
-#     source      = var.license_sig_location
-#     destination = "/tmp/license.sig"
-#     permissions = "0600"
-#   }
-
-# }
